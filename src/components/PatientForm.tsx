@@ -1,8 +1,12 @@
 import { useForm } from 'react-hook-form';
 import Error from './Error';
 import { DraftPatient } from '../interfaces';
+import { usePatientStore } from '../store';
 
 const PatientForm = () => {
+  // const addPatient = usePatientStore(state => state.addPatient ) // this one can be used as well.
+  const { addPatient } = usePatientStore();
+
   const {
     register,
     handleSubmit,
@@ -10,7 +14,7 @@ const PatientForm = () => {
   } = useForm<DraftPatient>();
 
   const registerPatient = (data: DraftPatient) => {
-    console.log(data);
+    addPatient(data);
   };
 
   return (
