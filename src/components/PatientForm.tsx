@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import Error from './Error';
 
 const PatientForm = () => {
   const {
@@ -34,9 +35,9 @@ const PatientForm = () => {
             type="text"
             className="w-full p-2 border border-gray-100"
             placeholder="Patient's name"
-            {...register('name', { required: 'Name patient is required' })}
+            {...register('name', { required: 'Patient name is required' })}
           />
-          {errors.name?.message}
+          {errors.name && <Error>{errors.name?.message as string}</Error>}
         </div>
 
         <div className="mb-5">
