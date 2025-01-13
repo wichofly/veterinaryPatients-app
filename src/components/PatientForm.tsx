@@ -1,15 +1,16 @@
 import { useForm } from 'react-hook-form';
 import Error from './Error';
+import { DraftPatient } from '../interfaces';
 
 const PatientForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<DraftPatient>();
 
-  const registerName = () => {
-    console.log('New Patient');
+  const registerPatient = (data: DraftPatient) => {
+    console.log(data);
   };
 
   return (
@@ -24,7 +25,7 @@ const PatientForm = () => {
       <form
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         noValidate
-        onSubmit={handleSubmit(registerName)}
+        onSubmit={handleSubmit(registerPatient)}
       >
         <div className="mb-5">
           <label htmlFor="name" className="text-sm uppercase font-semibold">
@@ -37,21 +38,26 @@ const PatientForm = () => {
             placeholder="Patient's name"
             {...register('name', { required: 'Patient name is required' })}
           />
-          {errors.name && <Error>{errors.name?.message as string}</Error>}
+          {errors.name && <Error>{errors.name?.message}</Error>}
         </div>
 
         <div className="mb-5">
-          <label htmlFor="owner" className="text-sm uppercase font-semibold">
-            Owner Name
+          <label
+            htmlFor="caretaker"
+            className="text-sm uppercase font-semibold"
+          >
+            Caretaker
           </label>
           <input
-            id="owner"
+            id="caretaker"
             type="text"
             className="w-full p-2 border border-gray-100"
-            placeholder="Owner's name"
-            {...register('owner', { required: 'Owner name is required' })}
+            placeholder="Caretaker's name"
+            {...register('caretaker', {
+              required: 'Caretaker name is required',
+            })}
           />
-          {errors.owner && <Error>{errors.owner.message as string}</Error>}
+          {errors.caretaker && <Error>{errors.caretaker.message}</Error>}
         </div>
 
         <div className="mb-5">
@@ -71,7 +77,7 @@ const PatientForm = () => {
               },
             })}
           />
-          {errors.email && <Error>{errors.email.message as string}</Error>}
+          {errors.email && <Error>{errors.email.message}</Error>}
         </div>
 
         <div className="mb-5">
@@ -84,7 +90,7 @@ const PatientForm = () => {
             className="w-full p-2 border border-gray-100"
             {...register('date', { required: 'Date is required' })}
           />
-          {errors.date && <Error>{errors.date.message as string}</Error>}{' '}
+          {errors.date && <Error>{errors.date.message}</Error>}{' '}
         </div>
 
         <div className="mb-5">
@@ -97,7 +103,7 @@ const PatientForm = () => {
             placeholder="Patient symptoms"
             {...register('symptom', { required: 'Symptoms are required' })}
           />
-          {errors.symptom && <Error>{errors.symptom.message as string}</Error>}{' '}
+          {errors.symptom && <Error>{errors.symptom.message}</Error>}{' '}
         </div>
 
         <input
