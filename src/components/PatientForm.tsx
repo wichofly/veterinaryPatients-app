@@ -48,8 +48,10 @@ const PatientForm = () => {
             id="owner"
             type="text"
             className="w-full p-2 border border-gray-100"
-            placeholder="Patient's name"
+            placeholder="Owner's name"
+            {...register('owner', { required: 'Owner name is required' })}
           />
+          {errors.owner && <Error>{errors.owner.message as string}</Error>}
         </div>
 
         <div className="mb-5">
@@ -61,7 +63,15 @@ const PatientForm = () => {
             type="email"
             className="w-full p-2 border border-gray-100"
             placeholder="Email"
+            {...register('email', {
+              required: 'Email is required',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Email not Valid',
+              },
+            })}
           />
+          {errors.email && <Error>{errors.email.message as string}</Error>}
         </div>
 
         <div className="mb-5">
@@ -72,7 +82,9 @@ const PatientForm = () => {
             id="date"
             type="date"
             className="w-full p-2 border border-gray-100"
+            {...register('date', { required: 'Date is required' })}
           />
+          {errors.date && <Error>{errors.date.message as string}</Error>}{' '}
         </div>
 
         <div className="mb-5">
@@ -83,7 +95,9 @@ const PatientForm = () => {
             id="symptom"
             className="w-full p-3  border border-gray-100"
             placeholder="Patient symptoms"
-          ></textarea>
+            {...register('symptom', { required: 'Symptoms are required' })}
+          />
+          {errors.symptom && <Error>{errors.symptom.message as string}</Error>}{' '}
         </div>
 
         <input
