@@ -19,7 +19,7 @@ const PatientList = () => {
             </span>
           </p>
           {patients.map((patient) => (
-            <PatientDetails patient={patient} />
+            <PatientDetails key={patient.id} patient={patient} />
           ))}
         </>
       ) : (
