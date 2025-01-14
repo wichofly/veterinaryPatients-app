@@ -1,4 +1,5 @@
 import { usePatientStore } from '../store';
+import PatientDetails from './PatientDetails';
 
 const PatientList = () => {
   const { patients } = usePatientStore();
@@ -7,7 +8,20 @@ const PatientList = () => {
   return (
     <div className="">
       {patients.length ? (
-        <p>Patient</p>
+        <>
+          <h2 className="font-semibold text-3xl text-center">
+            List of patients
+          </h2>
+          <p className="text-xl mt-5 mb-10 text-center">
+            Manage your{' '}
+            <span className="text-indigo-600 font-semibold">
+              patients and appointments
+            </span>
+          </p>
+          {patients.map((patient) => (
+            <PatientDetails patient={patient} />
+          ))}
+        </>
       ) : (
         <>
           <h2 className="font-semibold text-3xl text-center">
