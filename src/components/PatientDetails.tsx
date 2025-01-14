@@ -14,6 +14,15 @@ const PatientDetails = ({ patient }: PatientDetailsProps) => {
       <PatientDetailItem label="Email" data={patient.email} />
       <PatientDetailItem label="Entry Date" data={patient.date.toString()} />
       <PatientDetailItem label="Symptoms" data={patient.symptom} />
+
+      <div className="flex justify-between mt-10">
+        <button className="py-2 px-10 bg-indigo-600 text-white font-semibold uppercase rounded-lg hover:bg-indigo-700">
+          Edit
+        </button>
+        <button className="py-2 px-10 bg-red-600 text-white font-semibold uppercase rounded-lg hover:bg-red-700">
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
