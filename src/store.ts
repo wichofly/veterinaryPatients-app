@@ -1,32 +1,45 @@
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 import { v4 as uuid4 } from 'uuid';
 import { DraftPatient, Patient } from './interfaces';
 
 interface PatientState {
   patients: Patient[];
+  activeId: Patient['id'];
   addPatient: (data: DraftPatient) => void;
+  editPatient: (id: Patient['id']) => void;
   deletePatient: (id: Patient['id']) => void;
 }
 
-const createPatient = (patient: DraftPatient): Patient => { //The function createPatient converts a DraftPatient object into a Patient object by adding a unique identifier (id).
+const createPatient = (patient: DraftPatient): Patient => {
+  //The function createPatient converts a DraftPatient object into a Patient object by adding a unique identifier (id).
   return { ...patient, id: uuid4() };
 };
 
-export const usePatientStore = create<PatientState>((set) => ({
-  patients: [],
-  addPatient: (data) => {
-    const newPatient = createPatient(data);
-    set((state) => ({
-      patients: [...state.patients, newPatient],
-    }));
-  },
+export const usePatientStore = create<PatientState>()(
+  devtools((set) => ({
+    patients: [],
+    activeId: '',
+    addPatient: (data) => {
+      const newPatient = createPatient(data);
+      set((state) => ({
+        patients: [...state.patients, newPatient],
+      }));
+    },
 
-  deletePatient: (id) => {
-    set((state) => ({
-      patients: state.patients.filter((patient) => patient.id !== id),
-    }));
-  },
-}));
+    editPatient: (id) => {
+      set(() => ({
+        activeId: id,
+      }));
+    },
+
+    deletePatient: (id) => {
+      set((state) => ({
+        patients: state.patients.filter((patient) => patient.id !== id),
+      }));
+    },
+  }))
+);
 
 /**
  * The create function from Zustand is a factory to create a store.
