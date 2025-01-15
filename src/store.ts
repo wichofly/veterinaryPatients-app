@@ -8,6 +8,7 @@ interface PatientState {
   activeId: Patient['id'];
   addPatient: (data: DraftPatient) => void;
   editPatient: (id: Patient['id']) => void;
+  updatePatient: (data: DraftPatient) => void;
   deletePatient: (id: Patient['id']) => void;
 }
 
@@ -30,6 +31,15 @@ export const usePatientStore = create<PatientState>()(
     editPatient: (id) => {
       set(() => ({
         activeId: id,
+      }));
+    },
+
+    updatePatient: (data) => {
+      set((state) => ({
+        patients: state.patients.map((patient) =>
+          patient.id === state.activeId ? { id: patient.id, ...data } : patient
+        ),
+        activeId: '',
       }));
     },
 

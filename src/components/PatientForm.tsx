@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 const PatientForm = () => {
   // const addPatient = usePatientStore(state => state.addPatient ) // this one can be used as well.
-  const { patients, addPatient, activeId } = usePatientStore();
+  const { patients, addPatient, activeId, updatePatient } = usePatientStore();
 
   const {
     register,
@@ -27,10 +27,15 @@ const PatientForm = () => {
       setValue('date', activePatient.date);
       setValue('symptom', activePatient.symptom);
     }
-  }, [activeId, patients]);
+  }, [activeId, patients, setValue]);
 
   const registerPatient = (data: DraftPatient) => {
-    addPatient(data);
+    if (activeId) {
+      updatePatient(data);
+    } else {
+      addPatient(data);
+    }
+
     reset();
   };
 
