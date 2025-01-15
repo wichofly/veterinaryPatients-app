@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 import { v4 as uuid4 } from 'uuid';
 import { toast } from 'react-toastify';
 import { DraftPatient, Patient } from './interfaces';
@@ -19,43 +19,52 @@ const createPatient = (patient: DraftPatient): Patient => {
 };
 
 export const usePatientStore = create<PatientState>()(
-  devtools((set) => ({
-    patients: [],
-    activeId: '',
-    addPatient: (data) => {
-      const newPatient = createPatient(data);
-      set((state) => ({
-        patients: [...state.patients, newPatient],
-      }));
-      toast.success('Patient Added');
-    },
-
-    editPatient: (id) => {
-      set(() => ({
-        activeId: id,
-      }));
-    },
-
-    updatePatient: (data) => {
-      set((state) => ({
-        patients: state.patients.map((patient) =>
-          patient.id === state.activeId ? { id: patient.id, ...data } : patient
-        ),
+  devtools(
+    persist(
+      (set) => ({
+        patients: [],
         activeId: '',
-      }));
-      toast.info('Patient Updated');
-    },
+        addPatient: (data) => {
+          const newPatient = createPatient(data);
+          set((state) => ({
+            patients: [...state.patients, newPatient],
+          }));
+          toast.success('Patient Added');
+        },
 
-    deletePatient: (id) => {
-      set((state) => ({
-        patients: state.patients.filter((patient) => patient.id !== id),
-      }));
-      toast('Patient Deleted', {
-        position: 'top-center',
-        type: 'error',
-      });
-    },
-  }))
+        editPatient: (id) => {
+          set(() => ({
+            activeId: id,
+          }));
+        },
+
+        updatePatient: (data) => {
+          set((state) => ({
+            patients: state.patients.map((patient) =>
+              patient.id === state.activeId
+                ? { id: patient.id, ...data }
+                : patient
+            ),
+            activeId: '',
+          }));
+          toast.info('Patient Updated');
+        },
+
+        deletePatient: (id) => {
+          set((state) => ({
+            patients: state.patients.filter((patient) => patient.id !== id),
+          }));
+          toast('Patient Deleted', {
+            position: 'top-center',
+            type: 'error',
+          });
+        },
+      }),
+      {
+        name: 'patient-storage', 
+      }
+    )
+  )
 );
 
 /**
