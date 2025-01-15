@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { v4 as uuid4 } from 'uuid';
+import { toast } from 'react-toastify';
 import { DraftPatient, Patient } from './interfaces';
 
 interface PatientState {
@@ -26,6 +27,7 @@ export const usePatientStore = create<PatientState>()(
       set((state) => ({
         patients: [...state.patients, newPatient],
       }));
+      toast.success('Patient Added');
     },
 
     editPatient: (id) => {
@@ -41,12 +43,17 @@ export const usePatientStore = create<PatientState>()(
         ),
         activeId: '',
       }));
+      toast.info('Patient Updated');
     },
 
     deletePatient: (id) => {
       set((state) => ({
         patients: state.patients.filter((patient) => patient.id !== id),
       }));
+      toast('Patient Deleted', {
+        position: 'top-center',
+        type: 'error',
+      });
     },
   }))
 );
