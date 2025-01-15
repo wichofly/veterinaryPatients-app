@@ -1,4 +1,4 @@
-### Vet Patients App
+# Vet Patients App
 
 ## Overview
 
