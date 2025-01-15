@@ -8,7 +8,7 @@ interface PatientState {
   deletePatient: (id: Patient['id']) => void;
 }
 
-const createPatient = (patient: DraftPatient): Patient => {
+const createPatient = (patient: DraftPatient): Patient => { //The function createPatient converts a DraftPatient object into a Patient object by adding a unique identifier (id).
   return { ...patient, id: uuid4() };
 };
 
@@ -27,3 +27,9 @@ export const usePatientStore = create<PatientState>((set) => ({
     }));
   },
 }));
+
+/**
+ * The create function from Zustand is a factory to create a store.
+    - By passing the generic type <PatientState>, we explicitly define the structure of the store's state and its methods.
+    - This improves type safety, making the state predictable and avoiding runtime errors.
+ */
