@@ -24,6 +24,7 @@ export const usePatientStore = create<PatientState>()(
       (set) => ({
         patients: [],
         activeId: '',
+
         addPatient: (data) => {
           const newPatient = createPatient(data);
           set((state) => ({
@@ -61,7 +62,7 @@ export const usePatientStore = create<PatientState>()(
         },
       }),
       {
-        name: 'patient-storage', 
+        name: 'patient-storage',
       }
     )
   )

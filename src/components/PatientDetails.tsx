@@ -38,3 +38,13 @@ const PatientDetails = ({ patient }: PatientDetailsProps) => {
 };
 
 export default PatientDetails;
+
+/* Coding with Zustand:
+ * const { editPatient, deletePatient } = usePatientStore();
+  This component will be dependent on usePatientStore. Meaning that every time that value in the store changes, the component will be rerender.
+
+ * const deletePatient = usePatientStore((s) => s.deletePatient);
+  Better approach is to use a "selector (s or what ever)" to select our update function. So, the component is only dependent on the Function not dependent on usePatientStore.
+  Anything else changes, this component does not care.  
+
+ */
