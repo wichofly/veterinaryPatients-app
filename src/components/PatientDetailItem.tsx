@@ -2,6 +2,7 @@ interface PatientDetailItemProps {
   label: string;
   data: string;
 }
+
 const PatientDetailItem = ({ label, data }: PatientDetailItemProps) => {
   return (
     <p className="font-semibold mb-3 text-zinc-800 uppercase">
