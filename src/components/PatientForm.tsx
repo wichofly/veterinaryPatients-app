@@ -20,7 +20,7 @@ const PatientForm = () => {
     if (activeId) {
       const activePatient = patients.filter(
         (patient) => patient.id === activeId
-      )[0];
+      )[0]; // [0] to get the object from the array.
       setValue('name', activePatient.name);
       setValue('caretaker', activePatient.caretaker);
       setValue('email', activePatient.email);
