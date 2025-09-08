@@ -52,9 +52,7 @@ export const usePatientStore = create<PatientState>()(
         },
 
         deletePatient: (id) => {
-          set((state
-            
-          ) => ({
+          set((state) => ({
             patients: state.patients.filter((patient) => patient.id !== id),
           }));
           toast('Patient Deleted', {
