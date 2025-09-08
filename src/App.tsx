@@ -1,42 +1,35 @@
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import PatientForm from './components/PatientForm';
-import PatientList from './components/PatientList';
 import { useUserStore } from './store/userStore';
-import LoginForm from './auth/LoginForm';
+import LoginPage from './routes/LoginPage';
+import DashboardPage from './routes/DashboardPage';
 
-function App() {
-  const { currentUser, logout } = useUserStore();
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { currentUser } = useUserStore();
+  return currentUser ? <>{children}</> : <Navigate to="/login" replace />;
+};
 
+export default function App() {
   return (
-    <>
-      {currentUser ? (
-        <div className="container mx-auto mt-10">
-          <div className="flex flex-col gap-5 lg:flex-row justify-between items-center">
-            {' '}
-            <h1 className="font-semibold text-5xl text-center md:w-2/3 md:mx-auto text-zinc-800">
-              Patient tracking{' '}
-              <span className="text-emerald-700">Veterinary</span>
-            </h1>
-            <button
-              onClick={() => logout()}
-              className="mt-5 bg-emerald-600 px-4 py-2 rounded-lg text-white hover:bg-emerald-700"
-            >
-              Logout
-            </button>
-          </div>
-
-          <div className="mt-12 md:flex">
-            <PatientForm />
-            <PatientList />
-          </div>
-        </div>
-      ) : (
-        <LoginForm />
-      )}
-
+    <Router>
       <ToastContainer />
-    </>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;

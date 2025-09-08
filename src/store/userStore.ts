@@ -11,7 +11,7 @@ interface UserState {
 }
 
 const initialUsers: User[] = [
-  { id: uuid4(), username: 'admin', password: 'admin123' },
+  { id: uuid4(), username: 'Apolo', password: 'apoloVet' },
   { id: uuid4(), username: 'vetAby', password: 'vetUser123' },
 ];
 
@@ -20,16 +20,6 @@ console.log(initialUsers);
 export const useUserStore = create<UserState>()((set, get) => ({
   users: initialUsers,
   currentUser: null,
-
-  // register: (username, password) => {
-  //   if (get().users.some((u) => u.username === username)) return false;
-  //   const newUser: User = { id: uuid4(), username, password };
-  //   set((state) => ({
-  //     users: [...state.users, newUser],
-  //     currentUser: newUser,
-  //   }));
-  //   return true;
-  // },
 
   login: (username, password) => {
     const user = get().users.find(

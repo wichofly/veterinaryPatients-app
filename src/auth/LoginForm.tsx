@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useUserStore } from '../store/userStore';
 import Error from '../components/Error';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
   username: string;
@@ -14,9 +15,11 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<LoginFormProps>();
   const { login } = useUserStore();
+  const navigate = useNavigate();
 
   const onSubmit = (data: LoginFormProps) => {
     login(data.username, data.password);
+    navigate('/', { replace: true }); // Redirect to dashboard after login
   };
 
   return (
