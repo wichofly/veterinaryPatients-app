@@ -1,23 +1,35 @@
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import PatientForm from './components/PatientForm';
-import PatientList from './components/PatientList';
+import { useUserStore } from './store/userStore';
+import LoginPage from './routes/LoginPage';
+import DashboardPage from './routes/DashboardPage';
 
-function App() {
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { currentUser } = useUserStore();
+  return currentUser ? <>{children}</> : <Navigate to="/login" replace />;
+};
 
+export default function App() {
   return (
-    <div className="container mx-auto mt-10">
-      <h1 className="font-semibold text-5xl text-center md:w-2/3 md:mx-auto text-zinc-800">
-        Patient tracking <span className="text-emerald-700">Veterinary</span>
-      </h1>
-
-      <div className="mt-12 md:flex">
-        <PatientForm />
-        <PatientList />
-      </div>
-
+    <Router>
       <ToastContainer />
-    </div>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;

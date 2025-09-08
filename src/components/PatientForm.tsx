@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import Error from './Error';
 import { DraftPatient } from '../interfaces';
-import { usePatientStore } from '../store';
+import { usePatientStore } from '../store/patientStore';
 import { useEffect } from 'react';
 
 const PatientForm = () => {

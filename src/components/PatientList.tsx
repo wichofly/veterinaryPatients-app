@@ -1,4 +1,4 @@
-import { usePatientStore } from '../store';
+import { usePatientStore } from '../store/patientStore';
 import PatientDetails from './PatientDetails';
 
 const PatientList = () => {

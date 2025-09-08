@@ -9,3 +9,9 @@ export interface Patient {
 
 // New type without `id` from `Patient`. It is better to use type.
 export type DraftPatient = Omit<Patient, 'id'>;
+
+export interface User {
+  id: string;
+  username: string;
+  password: string;
+}
