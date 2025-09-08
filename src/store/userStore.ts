@@ -12,8 +12,9 @@ interface UserState {
 }
 
 const initialUsers: User[] = [
-  { id: uuid4(), username: 'Apolo', password: 'apoloVet' },
-  { id: uuid4(), username: 'vetAby', password: 'vetUser123' },
+  { id: uuid4(), username: 'Pablo', password: 'pabloVet' },
+  { id: uuid4(), username: 'Amelia', password: 'ameliaVet' },
+  { id: uuid4(), username: 'Admin', password: 'adminVet' },
 ];
 
 console.log(initialUsers);
