@@ -1,5 +1,5 @@
 import { Patient } from '../interfaces';
-import { usePatientStore } from '../store';
+import { usePatientStore } from '../store/patientStore';
 import PatientDetailItem from './PatientDetailItem';
 
 interface PatientDetailsProps {

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { v4 as uuid4 } from 'uuid';
 import { toast } from 'react-toastify';
-import { DraftPatient, Patient } from './interfaces';
+import { DraftPatient, Patient } from '../interfaces';
 
 interface PatientState {
   patients: Patient[];
@@ -52,7 +52,9 @@ export const usePatientStore = create<PatientState>()(
         },
 
         deletePatient: (id) => {
-          set((state) => ({
+          set((state
+            
+          ) => ({
             patients: state.patients.filter((patient) => patient.id !== id),
           }));
           toast('Patient Deleted', {
