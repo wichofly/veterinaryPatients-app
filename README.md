@@ -2,20 +2,47 @@
 
 ## Overview
 
-This project is a Veterinary Patient App where users can add, edit, view, and delete patient information. It's built using React and various modern tools for state management, form handling, and notifications.
+This project is a Veterinary Patient App where users can add, edit, view, and delete patient information. It's built using React and various modern tools for state management, form handling, authentication, and notifications.
 
 ## Features
 
+- **Authentication**: Users must log in to access the dashboard. Only authenticated users can manage patients.
 - **Patient Management**: Users can add new patients, edit existing ones, and delete patients from the system.
 - **Patient List**: Displays all patients with details like name, caretaker, symptoms, email, and more.
 - **Patient Form**: A user-friendly form for adding and editing patient information with validation.
 - **Notifications**: Toast notifications (via `react-toastify`) are used to inform users about actions like adding, updating, and deleting patients.
 - **Persistent State**: The app uses zustand for state management with persist middleware to save patient data across sessions.
 
+## Authentication
+
+The app uses a simple authentication flow handled on the client side:
+
+- **User Login**: Users authenticate via a login form. The credentials are matched against a static list of users stored in the app.
+- **Protected Routes**: React Router is used to protect dashboard and patient management routes. Unauthenticated users are redirected to the login page.
+- **Current Users**: The following test accounts are available:
+
+  - **Pablo**
+    - Username: `Pablo`
+    - Password: `pabloVet`
+  - **Amelia**
+    - Username: `Amelia`
+    - Password: `ameliaVet`
+
+After logging in, users are redirected to the dashboard where they can manage patient information.
+
+## Routing
+
+- **React Router** manages navigation and route protection:
+  - `/login`: Public login page.
+  - `/`: Dashboard (patient management). Requires authentication.
+  - Any other path redirects to `/login` if not authenticated.
+- **ProtectedRoute** component (or similar) is used to wrap routes that require authentication, ensuring only logged-in users have access.
+
 ## Technologies Used
 
 - **React**: A JavaScript library for building user interfaces.
-- **Zustand**: A small, fast, and scalable state management tool used here to manage patient data and actions like adding, updating, and deleting patients.
+- **React Router**: For client-side routing and route protection.
+- **Zustand**: Scalable state management for patient data and authentication state.
 - **react-hook-form**: Efficient and simple form handling with easy-to-implement validation.
 - **react-toastify**: For displaying toast notifications, such as success or error messages.
 - **Tailwind CSS**: Utility-first CSS framework used for styling.
@@ -62,3 +89,14 @@ This project is a Veterinary Patient App where users can add, edit, view, and de
 ## Deploy in Vercel
 
 [Veterinary Patients App](https://veterinary-patients-app.vercel.app/)
+
+## Test Users
+
+You can use these accounts to log in:
+
+| Username | Password  |
+| -------- | --------- |
+| Pablo    | pabloVet  |
+| Amelia   | ameliaVet |
+
+Enjoy managing your veterinary patients! 
