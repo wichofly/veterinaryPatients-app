@@ -108,7 +108,7 @@ const PatientForm = () => {
 
         <div className="mb-5">
           <label htmlFor="date" className="text-sm uppercase font-semibold">
-            Release date
+            Entry date
           </label>
           <input
             id="date"
