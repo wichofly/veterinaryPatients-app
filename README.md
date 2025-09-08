@@ -1,7 +1,5 @@
 # Vet Patients App
 
-## Overview
-
 This project is a Veterinary Patient App where users can add, edit, view, and delete patient information. It's built using React and various modern tools for state management, form handling, authentication, and notifications.
 
 ## Features
@@ -99,4 +97,4 @@ You can use these accounts to log in:
 | Pablo    | pabloVet  |
 | Amelia   | ameliaVet |
 
-Enjoy managing your veterinary patients! 
+Enjoy managing your veterinary patients!
