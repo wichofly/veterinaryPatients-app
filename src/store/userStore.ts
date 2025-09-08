@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { v4 as uuid4 } from 'uuid';
 import { User } from '../interfaces';
 import { toast } from 'react-toastify';
+import { persist } from 'zustand/middleware';
 
 interface UserState {
   users: User[];
@@ -17,25 +18,30 @@ const initialUsers: User[] = [
 
 console.log(initialUsers);
 
-export const useUserStore = create<UserState>()((set, get) => ({
-  users: initialUsers,
-  currentUser: null,
+export const useUserStore = create<UserState>()(
+  persist(
+    (set, get) => ({
+      users: initialUsers,
+      currentUser: null,
 
-  login: (username, password) => {
-    const user = get().users.find(
-      (u) => u.username === username && u.password === password
-    );
-    if (!user) {
-      toast.error('Login failed');
-      return false;
-    }
-    set({ currentUser: user });
-    toast.success(`Welcome, ${user.username}!`);
-    return true;
-  },
+      login: (username, password) => {
+        const user = get().users.find(
+          (u) => u.username === username && u.password === password
+        );
+        if (!user) {
+          toast.error('Login failed');
+          return false;
+        }
+        set({ currentUser: user });
+        toast.success(`Welcome, ${user.username}!`);
+        return true;
+      },
 
-  logout: () => {
-    set({ currentUser: null });
-    toast.info('Logged out');
-  },
-}));
+      logout: () => {
+        set({ currentUser: null });
+        toast.info('Logged out');
+      },
+    }),
+    { name: 'user-storage' }
+  )
+);
