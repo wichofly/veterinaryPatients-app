@@ -12,12 +12,14 @@ interface UserState {
 }
 
 const initialUsers: User[] = [
-  { id: uuid4(), username: 'Pablo', password: 'pabloVet' },
-  { id: uuid4(), username: 'Amelia', password: 'ameliaVet' },
-  { id: uuid4(), username: 'Admin', password: 'adminVet' },
+  { id: uuid4(), username: 'Pablo', password: import.meta.env.VITE_PABLO_PASS },
+  {
+    id: uuid4(),
+    username: 'Amelia',
+    password: import.meta.env.VITE_AMELIA_PASS,
+  },
+  { id: uuid4(), username: 'Admin', password: import.meta.env.VITE_ADMIN_PASS },
 ];
-
-console.log(initialUsers);
 
 export const useUserStore = create<UserState>()(
   persist(
