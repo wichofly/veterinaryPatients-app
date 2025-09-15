@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useUserStore } from '../store/userStore';
 import Error from '../components/Error';
 import { useNavigate } from 'react-router-dom';
+import UsersInfo from '../components/UsersInfo';
 
 interface LoginFormProps {
   username: string;
@@ -14,12 +15,12 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormProps>();
-  const { login } = useUserStore();
+  const { login, clearError } = useUserStore();
   const navigate = useNavigate();
 
   const onSubmit = (data: LoginFormProps) => {
     login(data.username, data.password);
-    navigate('/', { replace: true }); // Redirect to dashboard after login
+    navigate('/', { replace: true });
   };
 
   return (
@@ -43,6 +44,7 @@ const LoginForm = () => {
             className="w-full p-2 border border-gray-100"
             placeholder="Username"
             {...register('username', { required: 'Username is required' })}
+            onFocus={clearError}
           />
           {errors.username && <Error>{errors.username.message}</Error>}
         </div>
@@ -54,6 +56,7 @@ const LoginForm = () => {
             className="w-full p-2 border border-gray-100"
             placeholder="Password"
             {...register('password', { required: 'Password is required' })}
+            onFocus={clearError}
           />
           {errors.password && <Error>{errors.password.message}</Error>}
         </div>
@@ -63,6 +66,8 @@ const LoginForm = () => {
           value="Login"
         />
       </form>
+
+      <UsersInfo />
     </div>
   );
 };

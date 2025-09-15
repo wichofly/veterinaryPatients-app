@@ -9,6 +9,7 @@ interface UserState {
   currentUser: User | null;
   login: (username: string, password: string) => void;
   logout: () => void;
+  clearError: () => void;
 }
 
 const initialUsers: User[] = [
@@ -35,14 +36,21 @@ export const useUserStore = create<UserState>()(
           toast.error('Login failed');
           return false;
         }
+
         set({ currentUser: user });
         toast.success(`Welcome, ${user.username}!`);
         return true;
       },
 
       logout: () => {
+        const user = get().currentUser;
+
         set({ currentUser: null });
-        toast.info('Logged out');
+        toast.info(`Logged out, bye ${user?.username}!`);
+      },
+
+      clearError: () => {
+        toast.dismiss();
       },
     }),
     { name: 'user-storage' }
