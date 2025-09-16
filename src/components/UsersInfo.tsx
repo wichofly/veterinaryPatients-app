@@ -16,10 +16,7 @@ const UsersInfo = () => {
   };
 
   return (
-    <details
-      className="border border-transparent open:border-black/10 open:bg-white p-3 rounded-lg"
-      open
-    >
+    <details className="border border-transparent open:border-black/10 open:bg-white p-3 rounded-lg">
       <summary className="leading-6 font-semibold text-gray-900 select-none cursor-pointer">
         Demo Vet Users
       </summary>
