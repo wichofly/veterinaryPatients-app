@@ -3,7 +3,7 @@ import vetHospital from '../assets/vetPatient.png';
 
 const LoginPage = () => {
   return (
-    <div className='flex h-screen items-center justify-center'>
+    <div className="flex h-screen items-center justify-center">
       <div className="flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl w-full p-4">
         <LoginForm />
         <img
