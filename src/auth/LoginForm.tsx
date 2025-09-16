@@ -24,7 +24,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="container mx-auto mt-10 md:w-1/2 lg:w-1/3">
+    <div className="w-full max-w-md mx-auto">
       <h2 className="font-semibold text-3xl text-center mb-5">
         Welcome to Veterinary Patient Tracking
       </h2>
@@ -38,10 +38,13 @@ const LoginForm = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="mb-5">
+          <label htmlFor="username" className="sr-only">
+            Username
+          </label>
           <input
             id="username"
             type="text"
-            className="w-full p-2 border border-gray-100"
+            className="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-indigo-200"
             placeholder="Username"
             {...register('username', { required: 'Username is required' })}
             onFocus={clearError}
@@ -50,12 +53,21 @@ const LoginForm = () => {
         </div>
 
         <div className="mb-5">
+          <label htmlFor="password" className="sr-only">
+            Password
+          </label>
           <input
             id="password"
             type="password"
-            className="w-full p-2 border border-gray-100"
+            className="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-indigo-200"
             placeholder="Password"
-            {...register('password', { required: 'Password is required' })}
+            {...register('password', {
+              required: 'Password is required',
+              minLength: {
+                value: 6,
+                message: 'Password must be at least 6 characters',
+              },
+            })}
             onFocus={clearError}
           />
           {errors.password && <Error>{errors.password.message}</Error>}
