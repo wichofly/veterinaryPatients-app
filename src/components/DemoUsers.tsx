@@ -6,7 +6,7 @@ const demoUsers = [
   { username: 'Amelia', envPassword: import.meta.env.VITE_AMELIA_PASS },
 ];
 
-const UsersInfo = () => {
+const DemoUsers = () => {
   const { login } = useUserStore();
   const navigate = useNavigate();
 
@@ -38,4 +38,4 @@ const UsersInfo = () => {
   );
 };
 
-export default UsersInfo;
+export default DemoUsers;

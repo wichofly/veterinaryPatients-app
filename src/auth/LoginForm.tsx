@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useUserStore } from '../store/userStore';
 import Error from '../components/Error';
 import { useNavigate } from 'react-router-dom';
-import UsersInfo from '../components/UsersInfo';
+import DemoUsers from '../components/DemoUsers';
 
 interface LoginFormProps {
   username: string;
@@ -67,7 +67,7 @@ const LoginForm = () => {
         />
       </form>
 
-      <UsersInfo />
+      <DemoUsers />
     </div>
   );
 };
