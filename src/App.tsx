@@ -1,13 +1,13 @@
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
+    Navigate,
+    Route,
+    BrowserRouter as Router,
+    Routes,
 } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { useUserStore } from './store/userStore';
-import LoginPage from './routes/LoginPage';
 import DashboardPage from './routes/DashboardPage';
+import LoginPage from './routes/LoginPage';
+import { useUserStore } from './store/userStore';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { currentUser } = useUserStore();

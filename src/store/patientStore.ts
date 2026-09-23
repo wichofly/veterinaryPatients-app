@@ -1,7 +1,7 @@
+import { toast } from 'react-toastify';
+import { v4 as uuid4 } from 'uuid';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { v4 as uuid4 } from 'uuid';
-import { toast } from 'react-toastify';
 import { DraftPatient, Patient } from '../interfaces';
 
 interface PatientState {

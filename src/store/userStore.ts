@@ -1,8 +1,8 @@
-import { create } from 'zustand';
-import { v4 as uuid4 } from 'uuid';
-import { User } from '../interfaces';
 import { toast } from 'react-toastify';
+import { v4 as uuid4 } from 'uuid';
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { User } from '../interfaces';
 
 interface UserState {
   users: User[];

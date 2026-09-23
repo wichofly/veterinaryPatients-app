@@ -1,5 +1,5 @@
-import LoginForm from '../auth/LoginForm';
 import vetHospital from '../assets/vetPatient.png';
+import LoginForm from '../auth/LoginForm';
 
 const LoginPage = () => {
   return (

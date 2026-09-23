@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import Error from './Error';
 import { DraftPatient } from '../interfaces';
 import { usePatientStore } from '../store/patientStore';
-import { useEffect } from 'react';
+import Error from './Error';
 
 const PatientForm = () => {
   // const addPatient = usePatientStore(state => state.addPatient ) // this one can be used as well.
